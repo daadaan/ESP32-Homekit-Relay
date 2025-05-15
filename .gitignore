@@ -1,0 +1,42 @@
+# Arduino build folders
+/build/
+/*.ino.cpp
+/*.bin
+/*.elf
+/*.map
+/*.hex
+/*.eep
+/*.d
+/*.dep
+/*.o
+/*.a
+/*.lst
+
+# HomeSpan specific
+/homeSpan_settings.json
+/homeSpan_database.json
+
+# Arduino IDE user files
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# Backup files
+*.bak
+*.swp
+*.tmp
+*.orig
+
+# Compiled libraries
+/libraries/**/examples/
+/libraries/**/test/
+/libraries/**/doc/
+/libraries/**/docs/
+/libraries/**/.*
