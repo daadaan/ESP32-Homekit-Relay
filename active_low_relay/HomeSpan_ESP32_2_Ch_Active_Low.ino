@@ -34,11 +34,11 @@ void setup() {
 
   // HomeSpan configuration
   // Set GPIO 12 as control (push-button to start pairing) and GPIO 13 as status LED
-  homeSpan.setControlPin(12)
-          .setStatusPin(13)
+  homeSpan.setControlPin(12)  // GPIO pin to enter Setup mode
+          .setStatusPin(13)  // GPIO pin for status LED
           .setPairingCode("12345678")  // HomeKit pairing code
-          .setHostName("esp32-relay")        // mDNS hostname (e.g., esp32-relay.local)
-          .enableOTA("otapassword");         // Enable OTA updates with password
+          .setHostName("esp32-relay")  // mDNS hostname (e.g., esp32-relay.local)
+          .enableOTA("otapassword");  // Enable OTA updates with password
 
   // Start HomeSpan with accessory category and name
   homeSpan.begin(Category::Bridges, "ESP32 Bridge");
@@ -53,8 +53,8 @@ void setup() {
 
   // Add two relays controlled via HomeKit and hardware buttons
   // DEV_RELAY(relayPin, buttonPin)
-  new DEV_RELAY(26, 32);  // Relay 1 on GPIO 26, controlled by momentary button on GPIO 32
-  new DEV_RELAY(27, 33);  // Relay 2 on GPIO 27, controlled by momentary button on GPIO 33
+  new DEV_RELAY(26, 32);  // Relay 1 (active-low) on GPIO 26, controlled by momentary button on GPIO 32
+  new DEV_RELAY(27, 33);  // Relay 2 (active-low) on GPIO 27, controlled by momentary button on GPIO 33
 }
 
 void loop() {
