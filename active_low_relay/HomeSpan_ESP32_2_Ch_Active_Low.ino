@@ -1,3 +1,30 @@
+/*********************************************************************************
+ *  MIT License
+ *  
+ *  Copyright (c) 2021 Gregg E. Berman
+ *  
+ *  https://github.com/HomeSpan/HomeSpan
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *  
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ *  
+ ********************************************************************************/
+
 #include "HomeSpan.h" 
 #include "DEV_active_low_RELAY.h"  // Custom class for relay control with active-low configuration
 
@@ -10,8 +37,12 @@ void setup() {
   homeSpan.setControlPin(12)
           .setStatusPin(13)
           .setPairingCode("12345678")  // HomeKit pairing code
-          .begin(Category::Bridges, "ESP32 Bridge");  // Start HomeSpan in "Bridge" category
+          .setHostName("esp32-relay")        // mDNS hostname (e.g., esp32-relay.local)
+          .enableOTA("otapassword");         // Enable OTA updates with password
 
+  // Start HomeSpan with accessory category and name
+  homeSpan.begin(Category::Bridges, "ESP32 Bridge");
+  
   // Define a new accessory (i.e., a logical HomeKit device)
   new SpanAccessory();  // Start accessory definition
   new Service::AccessoryInformation();  // Required service for basic metadata
